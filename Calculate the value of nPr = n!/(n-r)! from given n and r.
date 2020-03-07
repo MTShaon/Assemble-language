@@ -1,0 +1,36 @@
+.MODEL SMALL
+.DATA
+        
+MAIN PROC
+	   
+	   
+	MOV al, 1	
+	MOV bl, 1	;fixed
+	mov ch,5   ;ch = value of n
+	mov bh,2    ;bh = value of r
+	mov cl,ch
+	fact:	
+	MUL cl
+	dec cl
+	cmp cl,bl
+	jle nminusr
+	jmp fact 
+	nminusr:
+	sub ch,bh
+	mov cl,ch
+	mov bh,al 
+	mov al,bl
+	
+	fact2:
+	MUL cl
+	dec cl
+	cmp cl,bl
+	jle division
+	jmp fact2
+	division:
+	mov cl,al
+	mov al,bh
+	div cl 
+	
+	main endp
+end
