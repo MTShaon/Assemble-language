@@ -1,0 +1,50 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+
+MAIN PROC
+    
+    mov ax,30
+    mov bx,15
+    mov cx,10
+         
+    cmp ax,bx
+    jl else
+
+    cmp bx,cx
+    jg bb
+        
+    cmp ax,cx
+    jl aa
+    jmp cc 
+    
+  
+    
+    else: 
+    
+    cmp ax,cx
+    jg aa 
+    
+    cmp bx,cx
+    jl bb 
+    jmp cc
+          
+    
+    
+      
+    bb:
+    mov dx,bx
+    jmp exit
+    
+    aa:
+    mov dx,ax
+    jmp exit
+    
+    cc:
+    mov dx,cx
+    jmp exit
+    
+    exit:
+     
+main endp
+end
