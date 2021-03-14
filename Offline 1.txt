@@ -1,0 +1,13 @@
+You can use external variable for the following programs.
+
+1. Find the mid among three numbers (in AX, BX and CX) and store it in DX.  EG. among 10, 30 and 15 - the value 15 is the mid value. 
+2. Write a program to count the number of words until a newline is pressed.
+3. Calculate the value of nPr = n!/(n-r)! from given n and r.
+4. Print the following pattern for n = 3
+  *
+ **
+***
+5. Print the following pattern for n = 4
+    *
+  ***
+*****
