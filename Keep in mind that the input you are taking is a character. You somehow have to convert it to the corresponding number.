@@ -1,0 +1,164 @@
+.MODEL SMALL
+ .STACK 100H
+
+ .DATA
+    PROMPT_1  DB  'Enter the first number:  ', 0dh, 0ah,'$\'
+    PROMPT_2  DB  'Enter the second number:  ', 0dh, 0ah,'$\'
+    PROMPT_3  DB  'Enter the third number:  ', 0dh, 0ah,'$\'
+    PROMPT_4  DB  'Enter the fourth number:  ', 0dh, 0ah,'$\'
+    PROMPT_5  DB  'Enter the fifth number:  ', 0dh, 0ah,'$\'
+    PROMPT_CON1  DB  'The sum is in range 1 : $\' 
+    PROMPT_CON2  DB  'The sum is in range 2 : $\'
+
+ .CODE
+   MAIN PROC
+     MOV AX, @DATA                ; initialize DS
+     MOV DS, AX
+
+     LEA DX, PROMPT_1             ; load and display the PROMPT_1
+     MOV AH, 9
+     INT 21H
+
+     MOV AH, 1                    ; read a character digit
+     INT 21H
+
+     MOV BL, AL                   ; save First digit in BL in ASCII code
+     SUB BL, 48d
+
+     MOV AH, 2                    ; carriage return
+     MOV DL, 0DH
+     INT 21H
+
+     MOV DL, 0AH                  ; line feed
+     INT 21H
+  
+
+     LEA DX, PROMPT_2             ; load and display the PROMPT_2
+     MOV AH, 9
+     INT 21H
+
+     MOV AH, 1                    ; read a character\\digit
+     INT 21H
+
+     MOV BH, AL                   ; save second digit in BH in ASCII code
+     SUB BH, 48d 
+     ADD BL,BH                    ;ADD 1st two number
+
+     MOV AH, 2                    ; carriage return
+     MOV DL, 0DH
+     INT 21H
+
+     MOV DL, 0AH                  ; line feed
+     INT 21H
+     
+
+     LEA DX, PROMPT_3             ; load and display the PROMPT_3
+     MOV AH, 9
+     INT 21H
+
+     MOV AH, 1                    ; read a character\\digit
+     INT 21H
+
+     MOV BH, AL                   ; save First digit in BH in ASCII code
+     SUB BH, 48d
+     ADD BL,BH                    ;ADD 1st three number
+
+     MOV AH, 2                    ; carriage return
+     MOV DL, 0DH
+     INT 21H
+
+     MOV DL, 0AH                  ; line feed
+     INT 21H
+     
+
+     LEA DX, PROMPT_4             ; load and display the PROMPT_4
+     MOV AH, 9
+     INT 21H
+
+     MOV AH, 1                    ; read a character\\digit
+     INT 21H
+
+     MOV BH, AL                   ; save First digit in BH in ASCII code
+     SUB BH, 48d
+     ADD BL,BH                    ;ADD 1st four number
+
+     MOV AH, 2                    ; carriage return
+     MOV DL, 0DH
+     INT 21H
+
+     MOV DL, 0AH                  ; line feed
+     INT 21H 
+     
+     
+     
+
+     LEA DX, PROMPT_5             ; load and display the PROMPT_5
+     MOV AH, 9
+     INT 21H
+
+     MOV AH, 1                    ; read a character\\digit
+     INT 21H
+
+     MOV BH, AL                   ; save First digit in Bh in ASCII code
+     SUB BH, 48d
+     ADD BL,BH                    ;ADD 1st five number
+     
+
+     MOV AH, 2                    ; carriage return
+     MOV DL, 0AH
+     INT 21H
+
+     MOV DL, 0AH                  ; line feed
+     INT 21H
+     
+     ;condition    
+                                  ;check sum is less then zero or not 
+     CMP BL,0                     ;jump  check_eq_5 for check sum is less then equal 5
+     JG check_eq_5                ;jump else for sum less then zero
+     JLE ELSE                     ;finish the condition
+     JMP EXIT
+       
+                                  
+     check_eq_5:                  ;check_eq_5 function 
+                                 
+                                  ;check sum is less then eqal 5 or not
+     CMP BL,5                     ;jump  check_eq_40 for check sum is greater then 5 
+     JG CHECK_EQ_40 
+     
+     LEA DX,PROMPT_CON1           ; load and display the PROMPT_CON1
+     MOV AH, 9
+     INT 21H   
+     
+     JMP EXIT                     ;finish the condition
+     
+     CHECK_EQ_40:                 ;check_eq_40 condition for check the sum greater then 40 or not  
+     CMP BL,40                    ;jump  ELSE for check sum is less then 40  
+     JL ELSE  
+     
+     LEA DX,PROMPT_CON1             ; load and display the PROMPT_CON1
+     MOV AH, 9
+     INT 21H 
+     
+     JMP EXIT                       ;finish the condition 
+     
+     
+     ELSE:  
+     
+     LEA DX, PROMPT_CON2             ; load and display the PROMPT_CON2
+     MOV AH, 9
+     INT 21H
+      
+     JMP EXIT                       ;finish the condition
+     
+     
+     
+     
+     
+     MOV AH, 4CH                  ; return control to DOS
+     INT 21H 
+     
+     EXIT:
+     
+   MAIN ENDP
+ END MAIN
+     
